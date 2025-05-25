@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Robust Reward Alignment via Hypothesis Space Batch Cutting</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    .emphasized-first-letter::first-letter {
+      font-family: 'Playfair Display', serif; /* Use your chosen swash font here */
+      font-size: 2em; /* Adjust size as needed */
+      font-weight: bold; /* Optional: makes the letter bold */
+      color: #000; /* Optional: change color if needed */
+      float: left; /* Optional: positions the letter to the left */
+      margin-right: 0.1em; /* Optional: space between the letter and the rest of the text */
+    }
+
+    .tab-font {
+      font-weight: bold;
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <link rel="icon" href="./static/images/IRIS_icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+</head>
+<body>
+
+<!-- author and links section -->  
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Robust Reward Alignment via Hypothesis Space Batch Cutting</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zhi-xian-xie.github.io" target="_blank">Zhixian Xie</a><sup>1</sup>&nbsp&nbsp,</span>
+
+            <span class="author-block">
+              Haode Zhang<sup>2</sup>&nbsp&nbsp, </span>
+
+            <span class="author-block">
+              Yizhe Feng<sup>2</sup>&nbsp&nbsp, </span>
+
+            <span class="author-block">
+              <a href="https://asu-iris.github.io/" target="_blank">Wanxin Jin</a><sup>1</sup></span>
+
+
+            <!-- <span class="author-block">
+              <a href="https://zhuoranyang.github.io/" target="_blank">Zhuoran Yang</a><sup>3</sup>&nbsp&nbsp</span>
+
+            <span class="author-block">
+              <a href="https://engineering.purdue.edu/AAE/people/ptProfile?resource_id=124981" target="_blank">Shaoshuai Mou</a><sup>4</sup>,&nbsp&nbsp</span>
+            </span>
+
+            <span class="author-block">
+              <a href="https://www.georgejpappas.org/" target="_blank">George J. Pappas</a><sup>5</sup>
+            </span> -->
+
+
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Arizona State University</span>
+            <span class="author-block"><sup>2</sup>Shanghai Jiao Tong University</span>
+            <!-- <span class="author-block"><sup>2</sup>Northwestern University,&nbsp&nbsp</span>
+            <span class="author-block"><sup>3</sup>Yale University,&nbsp&nbsp</span><br>
+            <span class="author-block"><sup>4</sup>Purdue University,&nbsp&nbsp</span>
+            <span class="author-block"><sup>5</sup>University of Pennsylvania</span> -->
+          </div>
+          
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://proceedings.neurips.cc/paper/2020/hash/5a7b238ba0f6502e5d6be14424b20ded-Abstract.html" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Preprint</span>
+                </a>
+              </span> -->
+              <!-- <span class="link-block">
+                <a href="https://papers.nips.cc/paper/2021/hash/85ea6fd7a2ca3960d0cf5201933ac998-Abstract.html" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>NeurIPS Paper 2</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/wanxinjin/Pontryagin-Differentiable-Programming" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code Repo</span>
+                </a>
+              </span> -->
+
+                <!-- Code Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://github.com/wanxinjin/Pontryagin-Differentiable-Programming" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video demo</span>
+                  </a>
+                </span> -->
+                            <!-- Code Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/wanxinjin/Safe-PDP" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code Repo 2</span>
+                </a>
+              </span> -->
+
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/askforalfred/alfred"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                </a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- teaser section (very important) -->   
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+      <h2 class="subtitle has-text-centered">
+        <b>Overview:</b> 
+        Coming Soon!
+        <br><br>
+    
+        <!-- significant video or figure goes here -->    
+        <hr>
+        <br>
+        <figure>
+            <h2 class="title is-2">Video: Coming Soon!</h2>
+            <!-- <video id="teaser" muted loop playsinline controls style="width: 100%; max-width: 1000px; height: auto;">
+              <source src="./static/videos/hardware/duck_1x_small.mp4"
+                      type="video/mp4">
+            </video> -->
+            <br><br>
+        </figure>
+      </h2>
+  </div>
+
+</section>
+
+<!-- how-it-works section -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+      <br>
+      <hr>
+      <br>
+      <h2 class="title is-2">Method Overview</h2>
+      <div class="content text-align: left">
+        <br>
+        Coming Soon!
+      </div>
+    <!-- </div> -->
+       <!-- /Figure -->
+      <!-- <div style="text-align: center;">
+        <img src="./static/images/web_sdf_fig2.png" alt="Description of the image" style="max-width: 90%; height: auto;">
+        <figcaption class="has-text-centered">Captions</figcaption> 
+      </div> -->
+      <br>
+      <hr>
+  </div>
+</section>
+
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <br>
+    <hr>
+    <br>
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{TBD,
+  author    = {Xie, Zhixian, Yang, Wen and Jin, Wanxin},
+  title     = {On-Palm Dexterity: Dynamic Reorientation of Objects via Emergent Flipping and Sliding},
+  journal   = {tbd},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section> -->
+
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
