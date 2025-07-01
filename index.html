@@ -246,8 +246,14 @@
         It proceeds in iterative batches, maintaining a shrinking hypothesis space of possible reward parameters.
       </p>
       <p>
-        In each iteration, HSBC follows three steps: (1) <b>sampling</b> a set of reward hypotheses, (2) <b>actively querying</b> human preferences on selected trajectory pairs based on ensemble disagreement, and (3) <b>cutting</b> the hypothesis space by keeping only reward hypotheses consistent with the new batch of preferences.
+        In each iteration, HSBC follows three steps: 
       </p>
+      <div class="algorithm">
+        <strong>HSBC Algorithm:</strong><br>
+        (1) <b>sampling</b> a set of reward hypotheses
+        (2) <b>actively querying</b> human preferences on selected trajectory pairs based on ensemble disagreement
+        (3) <b>cutting</b> the hypothesis space by keeping only reward hypotheses consistent with the new batch of preferences
+      </div>
       <p>
         To ensure robustness, the algorithm uses a <em>conservative cutting threshold</em> that tolerates a bounded fraction of false preferences in each batch.
         This allows the method to continue learning reliably without needing to explicitly identify incorrect feedback.
@@ -261,22 +267,22 @@
       <div class="columns">
           <div class="column">
               <div class="figure">
-                  <img src="./static/images/Figs/Cuts/disagree_1.jpg" alt="Disagreement example left" style="width: 35%;">
-                  <!-- <div class="caption"><b>Fig. 1 Left</b>: Disagreement-based batch selection of trajectory pairs.</div> -->
+                  <img src="./static/images/Figs/Cuts/disagree_1.jpg" alt="Disagreement example left"/>
+                  <div class="caption"><b>Fig. 1 Left</b></div> 
               </div>
           </div>
           <div class="column">
               <div class="figure">
-                  <img src="./static/images/Figs/Cuts/disagree_2.jpg" alt="Disagreement example right" style="width: 35%;">
-                  <!-- <div class="caption"><b>Fig. 1 Right</b>: Ensemble disagreement regions guiding queries.</div> -->
+                  <img src="./static/images/Figs/Cuts/disagree_2.jpg" alt="Disagreement example right"/>
+                  <div class="caption"><b>Fig. 1 Right</b></div> 
               </div>
           </div>
       </div>
 
       <!-- Figure 2: cut_noerror full width -->
       <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
-          <img src="./static/images/Figs/Cuts/cut_noerror.jpg" alt="Space refinement with correct feedback" style="width: 35%;">
-          <!-- <div class="caption"><b>Fig. 2</b>: Precise hypothesis space refinement using clean human feedback.</div> -->
+          <img src="./static/images/Figs/Cuts/cut_noerr.jpg" alt="Space refinement with correct feedback" style="width: 50%;">
+          <div class="caption"><b>Fig. 2</b></div> 
       </div>
 
       <p>
@@ -288,14 +294,14 @@
       <div class="columns">
           <div class="column">
               <div class="figure">
-                  <img src="./static/images/Figs/Cuts/cut_out.png" alt="Incorrect cut due to false preference" style="width: 35%;">
-                  <!-- <div class="caption"><b>Fig. 3 Left</b>: Naive cut caused by false preference erroneously removes true reward hypotheses.</div> -->
+                  <img src="./static/images/Figs/Cuts/cut_out.png" alt="Incorrect cut due to false preference"/>
+                  <div class="caption"><b>Fig. 3 Left</b></div> 
               </div>
           </div>
           <div class="column">
               <div class="figure">
-                  <img src="./static/images/Figs/Cuts/cut_robust.png" alt="Robust conservative cut" style="width: 35%;">
-                  <!-- <div class="caption"><b>Fig. 3 Right</b>: HSBC’s robust, conservative cut preserves the true reward region despite false feedback.</div> -->
+                  <img src="./static/images/Figs/Cuts/cut_robust.png" alt="Robust conservative cut"/>
+                  <div class="caption"><b>Fig. 3 Right</b></div> 
               </div>
           </div>
       </div>
@@ -317,8 +323,8 @@
     <div class="content" style="font-size: 1.05em;">
       <p>
         We evaluate HSBC on a diverse set of reinforcement learning and model predictive control tasks, including locomotion
-        (<em>Cartpole</em>, <em>Walker</em>, <em>Humanoid</em>, <em>Go2-Standup</em>) and dexterous manipulation
-        (<em>Dexman-Cube</em>, <em>Dexman-Bunny</em>).
+        (<em>Cartpole-Swingup</em>, <em>Walker-Walk</em>, <em>Humanoid-Standup</em>, <em>Go2-Standup</em>) and dexterous manipulation
+        (<em>Allegro-Cube</em>, <em>Allegro-Bunny</em>).
       </p>
       <p>
         Our method achieves performance comparable to or better than state-of-the-art baselines such as PREF-BI and Disagreement Learning
@@ -373,7 +379,7 @@
           <source src="./static/videos/cartpole.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
-        <p>Cartpole</p>
+        <p>Cartpole Swingup</p>
       </div>
 
       <div style="width: 48%; text-align: center;">
@@ -381,7 +387,7 @@
           <source src="./static/videos/hopper.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
-        <p>Hopper</p>
+        <p>Walker Walk</p>
       </div>
 
     </div>
