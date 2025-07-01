@@ -236,79 +236,76 @@
 
 
 <!-- method section -->
-<section class="section" id="results">
+<section class="section" id="method">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Methods</h2>
-      <div class="container" style="font-size: 1.05em;">
-          <h1>Robust Reward Alignment via Hypothesis Space Batch Cutting</h1>
-  
-          <div class="section" id="method">
-              <h2>Core Method Overview</h2>
-              <p>
-                  HSBC iteratively refines the reward hypothesis space through three key steps:
-              </p>
-              <div class="algorithm">
-                  <strong>HSBC Algorithm:</strong><br>
-                  1. <u>Hypothesis Sampling</u>: Sample reward parameters from the current hypothesis space<br>
-                  2. <u>Disagreement-based Query</u>: Select trajectory pairs where model ensemble disagrees most<br>
-                  3. <u>Hypothesis Space Cutting</u>: Update the hypothesis space using batched human preferences
+  <h2 class="title is-3 has-text-centered">Our Method: Hypothesis Space Batch Cutting (HSBC)</h2>
+
+    <div class="content" style="font-size: 1.05em;">
+      <p>
+        HSBC is a novel and robust algorithm for learning reward functions from human preferences, even when some of these preferences may be incorrect.
+        It proceeds in iterative batches, maintaining a shrinking hypothesis space of possible reward parameters.
+      </p>
+      <p>
+        In each iteration, HSBC follows three steps: (1) <b>sampling</b> a set of reward hypotheses, (2) <b>actively querying</b> human preferences on selected trajectory pairs based on ensemble disagreement, and (3) <b>cutting</b> the hypothesis space by keeping only reward hypotheses consistent with the new batch of preferences.
+      </p>
+      <p>
+        To ensure robustness, the algorithm uses a <em>conservative cutting threshold</em> that tolerates a bounded fraction of false preferences in each batch.
+        This allows the method to continue learning reliably without needing to explicitly identify incorrect feedback.
+      </p>
+      <p>
+          Below we illustrate key components of the HSBC algorithm. It starts by selecting trajectory pairs from regions where ensemble policies
+          disagree most, then progressively cuts the hypothesis space based on human feedback.
+      </p>
+
+      <!-- Figure 1: two disagree images side by side -->
+      <div class="columns">
+          <div class="column">
+              <div class="figure">
+                  <img src="./static/images/Figs/Cuts/disagree_1.jpg" alt="Disagreement example left" style="width: 35%;">
+                  <!-- <div class="caption"><b>Fig. 1 Left</b>: Disagreement-based batch selection of trajectory pairs.</div> -->
               </div>
-  
-              <p style="margin-top: 1.5em;">
-                  Below we illustrate key components of the HSBC algorithm. It starts by selecting trajectory pairs from regions where ensemble policies
-                  disagree most, then progressively cuts the hypothesis space based on human feedback.
-              </p>
-  
-              <!-- Figure 2: two disagree images side by side -->
-              <div class="columns">
-                  <div class="column">
-                      <div class="figure">
-                          <img src="./static/images/Figs/Cuts/disagree_1.png" alt="Disagreement example left" />
-                          <div class="caption"><b>Fig. 2 Left</b>: Disagreement-based batch selection of trajectory pairs.</div>
-                      </div>
-                  </div>
-                  <div class="column">
-                      <div class="figure">
-                          <img src="./static/images/Figs/Cuts/disagree_2.png" alt="Disagreement example right" />
-                          <div class="caption"><b>Fig. 2 Right</b>: Ensemble disagreement regions guiding queries.</div>
-                      </div>
-                  </div>
-              </div>
-  
-              <!-- Figure 1: cut_noerror full width -->
-              <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
-                  <img src="./static/images/Figs/Cuts/cut_noerror.png" alt="Space refinement with correct feedback" />
-                  <div class="caption"><b>Fig. 1</b>: Precise hypothesis space refinement using clean human feedback.</div>
-              </div>
-  
-              <p>
-                  With clean preferences, the cuts accurately isolate the true reward region as shown in Fig. 1. However, false or noisy preferences can cause naive cuts that
-                  incorrectly eliminate the correct hypotheses.
-              </p>
-  
-              <!-- Figure 3: two images side by side: cut_out and cut_robust -->
-              <div class="columns">
-                  <div class="column">
-                      <div class="figure">
-                          <img src="./static/images/Figs/Cuts/cut_out.png" alt="Incorrect cut due to false preference" />
-                          <div class="caption"><b>Fig. 3 Left</b>: Naive cut caused by false preference erroneously removes true reward hypotheses.</div>
-                      </div>
-                  </div>
-                  <div class="column">
-                      <div class="figure">
-                          <img src="./static/images/Figs/Cuts/cut_robust.png" alt="Robust conservative cut" />
-                          <div class="caption"><b>Fig. 3 Right</b>: HSBC’s robust, conservative cut preserves the true reward region despite false feedback.</div>
-                      </div>
-                  </div>
-              </div>
-  
-              <p>
-                  To handle noisy human preferences, HSBC applies a conservative cutting threshold that tolerates some false feedback, thus preserving the true reward region and enabling reliable learning.
-              </p>
           </div>
+          <div class="column">
+              <div class="figure">
+                  <img src="./static/images/Figs/Cuts/disagree_2.jpg" alt="Disagreement example right" style="width: 35%;">
+                  <!-- <div class="caption"><b>Fig. 1 Right</b>: Ensemble disagreement regions guiding queries.</div> -->
+              </div>
+          </div>
+      </div>
+
+      <!-- Figure 2: cut_noerror full width -->
+      <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
+          <img src="./static/images/Figs/Cuts/cut_noerror.jpg" alt="Space refinement with correct feedback" style="width: 35%;">
+          <!-- <div class="caption"><b>Fig. 2</b>: Precise hypothesis space refinement using clean human feedback.</div> -->
+      </div>
+
+      <p>
+          With clean preferences, the cuts accurately isolate the true reward region as shown in Fig. 1. However, false or noisy preferences can cause naive cuts that
+          incorrectly eliminate the correct hypotheses.
+      </p>
+
+      <!-- Figure 3: two images side by side: cut_out and cut_robust -->
+      <div class="columns">
+          <div class="column">
+              <div class="figure">
+                  <img src="./static/images/Figs/Cuts/cut_out.png" alt="Incorrect cut due to false preference" style="width: 35%;">
+                  <!-- <div class="caption"><b>Fig. 3 Left</b>: Naive cut caused by false preference erroneously removes true reward hypotheses.</div> -->
+              </div>
+          </div>
+          <div class="column">
+              <div class="figure">
+                  <img src="./static/images/Figs/Cuts/cut_robust.png" alt="Robust conservative cut" style="width: 35%;">
+                  <!-- <div class="caption"><b>Fig. 3 Right</b>: HSBC’s robust, conservative cut preserves the true reward region despite false feedback.</div> -->
+              </div>
+          </div>
+      </div>
+
+      <p>
+          To handle noisy human preferences, HSBC applies a conservative cutting threshold that tolerates some false feedback, thus preserving the true reward region and enabling reliable learning.
+      </p>
     </div>
-</body>
-</html>
+  </div>
+</section>
 
 
 
@@ -389,30 +386,6 @@
 
     </div>
 
-  </div>
-</section>
-
-
-<!-- how-it-works section -->
-
-<section class="section">
-  <div class="container is-max-desktop">
-      <br>
-      <hr>
-      <br>
-      <h2 class="title is-2">Method Overview</h2>
-      <div class="content text-align: left">
-        <br>
-        Coming Soon!
-      </div>
-    <!-- </div> -->
-       <!-- /Figure -->
-      <!-- <div style="text-align: center;">
-        <img src="./static/images/web_sdf_fig2.png" alt="Description of the image" style="max-width: 90%; height: auto;">
-        <figcaption class="has-text-centered">Captions</figcaption> 
-      </div> -->
-      <br>
-      <hr>
   </div>
 </section>
 
