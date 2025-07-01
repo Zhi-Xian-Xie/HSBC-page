@@ -69,7 +69,7 @@
           <h1 class="title is-1 publication-title">Robust Reward Alignment via Hypothesis Space Batch Cutting</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://zhi-xian-xie.github.io" target="_blank">Zhixian Xie*</a><sup>1</sup>&nbsp&nbsp,</span>
+              <a href="https://zhi-xian-xie.github.io" target="_blank">Zhixian Xie</a>*<sup>1</sup>&nbsp&nbsp,</span>
 
             <span class="author-block">
               Haode Zhang*<sup>2</sup>&nbsp&nbsp, </span>
@@ -236,81 +236,185 @@
 
 
 <!-- method section -->
-<section class="section" id="method">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Methods</h2>
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Robust Reward Alignment via Hypothesis Space Batch Cutting</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            background-color: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+        .figure {
+            margin: 25px 0;
+            text-align: center;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        .figure img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .algorithm {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+        .key-concept {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid #3498db;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .columns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .column {
+            flex: 1 1 45%;
+            max-width: 45%;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .column {
+                max-width: 100%;
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Robust Reward Alignment via Hypothesis Space Batch Cutting</h1>
 
-    <div class="content" style="font-size: 1.05em;">
-      <p>
-        HSBC is a novel and robust algorithm for learning reward functions from human preferences, even when some of these preferences may be incorrect.
-        It proceeds in iterative batches, maintaining a shrinking hypothesis space of possible reward parameters.
-      </p>
-      <p>
-        In each iteration, HSBC follows three steps: (1) <b>sampling</b> a set of reward hypotheses, (2) <b>actively querying</b> human preferences on selected trajectory pairs based on ensemble disagreement, and (3) <b>cutting</b> the hypothesis space by keeping only reward hypotheses consistent with the new batch of preferences.
-      </p>
-      <p>
-        To ensure robustness, the algorithm uses a <em>conservative cutting threshold</em> that tolerates a bounded fraction of false preferences in each batch.
-        This allows the method to continue learning reliably without needing to explicitly identify incorrect feedback.
-      </p>
-      <p>
-        Below we illustrate key components of the HSBC algorithm.
-        It begins with selecting trajectory pairs from regions where ensemble policies disagree most,
-        as shown in Figures A and E.
-      </p>
+        <div class="section" id="method">
+            <h2>Core Method Overview</h2>
+            <p>
+                HSBC iteratively refines the reward hypothesis space through three key steps:
+            </p>
+            <div class="algorithm">
+                <strong>HSBC Algorithm:</strong><br>
+                1. <u>Hypothesis Sampling</u>: Sample reward parameters from the current hypothesis space<br>
+                2. <u>Disagreement-based Query</u>: Select trajectory pairs where model ensemble disagrees most<br>
+                3. <u>Hypothesis Space Cutting</u>: Update the hypothesis space using batched human preferences
+            </div>
+
+            <p style="margin-top: 1.5em;">
+                Below we illustrate key components of the HSBC algorithm. It starts by selecting trajectory pairs from regions where ensemble policies
+                disagree most, then progressively cuts the hypothesis space based on human feedback.
+            </p>
+
+            <!-- Figure 2: two disagree images side by side -->
+            <div class="columns">
+                <div class="column">
+                    <div class="figure">
+                        <img src="./static/images/Figs/Cuts/disagree_1.png" alt="Disagreement example left" />
+                        <div class="caption"><b>Fig. 2 Left</b>: Disagreement-based batch selection of trajectory pairs.</div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="figure">
+                        <img src="./static/images/Figs/Cuts/disagree_2.png" alt="Disagreement example right" />
+                        <div class="caption"><b>Fig. 2 Right</b>: Ensemble disagreement regions guiding queries.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Figure 1: cut_noerror full width -->
+            <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
+                <img src="./static/images/Figs/Cuts/cut_noerror.png" alt="Space refinement with correct feedback" />
+                <div class="caption"><b>Fig. 1</b>: Precise hypothesis space refinement using clean human feedback.</div>
+            </div>
+
+            <p>
+                With clean preferences, the cuts accurately isolate the true reward region as shown in Fig. 1. However, false or noisy preferences can cause naive cuts that
+                incorrectly eliminate the correct hypotheses.
+            </p>
+
+            <!-- Figure 3: two images side by side: cut_out and cut_robust -->
+            <div class="columns">
+                <div class="column">
+                    <div class="figure">
+                        <img src="./static/images/Figs/Cuts/cut_out.png" alt="Incorrect cut due to false preference" />
+                        <div class="caption"><b>Fig. 3 Left</b>: Naive cut caused by false preference erroneously removes true reward hypotheses.</div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="figure">
+                        <img src="./static/images/Figs/Cuts/cut_robust.png" alt="Robust conservative cut" />
+                        <div class="caption"><b>Fig. 3 Right</b>: HSBC’s robust, conservative cut preserves the true reward region despite false feedback.</div>
+                    </div>
+                </div>
+            </div>
+
+            <p>
+                To handle noisy human preferences, HSBC applies a conservative cutting threshold that tolerates some false feedback, thus preserving the true reward region and enabling reliable learning.
+            </p>
+        </div>
     </div>
+</body>
+</html>
 
-    <div class="columns is-multiline is-centered" style="margin-bottom: 2em;">
-      <div class="column is-half has-text-centered">
-        <figure>
-          <img src="./static/images/disagree_2.png" alt="cut_disagree" style="max-width: 100%;">
-          <figcaption><b>Figure A</b>: Batch selection via ensemble disagreement.</figcaption>
-        </figure>
-      </div>
-      <div class="column is-half has-text-centered">
-        <figure>
-          <img src="./static/images/disagree_1.png" alt="cut_single" style="max-width: 100%;">
-          <figcaption><b>Figure E</b>: Comparison of single-pair vs batch cuts.</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="columns is-multiline is-centered" style="margin-bottom: 2em;">
-      <div class="column is-half is-offset-one-quarter has-text-centered">
-        <figure>
-          <img src="./static/images/cut_noerror.png" alt="noerror" style="max-width: 100%;">
-          <figcaption><b>Figure B</b>: Space refinement with correct feedback.</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="columns is-multiline is-centered">
-      <div class="column is-half has-text-centered">
-        <figure>
-          <img src="./static/images/cut_out.png" alt="cot_out" style="max-width: 100%;">
-          <figcaption><b>Figure C</b>: False preference causes incorrect cut.</figcaption>
-        </figure>
-      </div>
-      <div class="column is-half has-text-centered">
-        <figure>
-          <img src="./static/images/cut_robust.png" alt="cut_robust" style="max-width: 100%;">
-          <figcaption><b>Figure D</b>: Robust cut preserves true reward region.</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="content" style="font-size: 1.05em; margin-top: 1.5em;">
-      <p>
-        Specifically, HSBC first selects trajectory pairs in regions where the ensemble of reward hypotheses most disagree (Figures A and E).
-        When clean preferences are available, cuts made based on these preferences accurately isolate the true reward region (Figure B).
-      </p>
-      <p>
-        However, false or noisy preferences can lead to naive cuts that mistakenly eliminate the correct reward hypotheses (Figure C).
-        To address this, HSBC employs robust, conservative cuts (Figure D) that tolerate some false feedback, preserving the true reward region and enabling reliable learning.
-      </p>
-    </div>
-
-  </div>
-</section>
 
 
 <!-- results section -->
