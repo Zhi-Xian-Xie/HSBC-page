@@ -69,10 +69,10 @@
           <h1 class="title is-1 publication-title">Robust Reward Alignment via Hypothesis Space Batch Cutting</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://zhi-xian-xie.github.io" target="_blank">Zhixian Xie</a><sup>1</sup>&nbsp&nbsp,</span>
+              <a href="https://zhi-xian-xie.github.io" target="_blank">Zhixian Xie*</a><sup>1</sup>&nbsp&nbsp,</span>
 
             <span class="author-block">
-              Haode Zhang<sup>2</sup>&nbsp&nbsp, </span>
+              Haode Zhang*<sup>2</sup>&nbsp&nbsp, </span>
 
             <span class="author-block">
               Yizhe Feng<sup>2</sup>&nbsp&nbsp, </span>
@@ -182,35 +182,31 @@
     <h2 class="title is-3 has-text-centered">Abstract</h2>
     <div class="content" style="font-size: 1.05em;">
       <p>
-        Reward design in reinforcement learning and optimal control is challenging. Preference-based
-        alignment addresses this by enabling agents to learn rewards from ranked trajectory pairs provided by humans.
-        However, existing methods often struggle from poor robustness to unknown false human preferences.
+        Reward design in reinforcement learning is challenging, especially when human preferences contain errors.
+        We propose a robust and efficient alignment method called <strong>Hypothesis Space Batch Cutting (HSBC)</strong>, which refines the reward space
+        by making conservative "cuts" based on batch-wise human feedback. By grouping preferences and applying disagreement-based queries,
+        HSBC improves robustness against false preferences without needing to explicitly identify them.
       </p>
       <p>
-        In this work, we propose a robust and efficient reward alignment method based on a novel and geometrically interpretable
-        perspective: <strong>hypothesis space batched cutting</strong>. Our method iteratively refines the reward hypothesis space through “cuts”
-        based on batches of human preferences. Within each batch, human preferences, queried based on disagreement, are grouped using a
-        voting function to determine the appropriate cut, ensuring a bounded human query complexity.
+        Our method is evaluated across diverse control tasks and achieves competitive results under clean settings,
+        while significantly outperforming baselines under high-noise conditions.
       </p>
       <p>
-        To handle unknown erroneous preferences, we introduce a conservative cutting method within each batch, preventing
-        erroneous human preferences from making overly aggressive cuts to the hypothesis space. This guarantees provable robustness
-        against false preferences, while eliminating the need to explicitly identify them.
-      </p>
-      <p>
-        We evaluate our method in a model predictive control setting across diverse tasks. The results demonstrate that our framework
-        achieves comparable or superior performance to state-of-the-art methods in error-free settings while significantly
-        outperforming existing methods when handling a high percentage of erroneous human preferences.
-      </p>
-      <p>
-        Code can be accessed via the following link:  
+        Code is available at:
         <a href="https://github.com/Zhi-Xian-Xie/Disagreement_Learning" target="_blank">
           https://github.com/Zhi-Xian-Xie/Disagreement_Learning
-        </a>.
+        </a>
+      </p>
+      <p>
+        For full details, please see the paper at:
+        <a href="https://arxiv.org/abs/2502.02921" target="_blank">
+          https://arxiv.org/abs/2502.02921
+        </a>
       </p>
     </div>
   </div>
 </section>
+
 
 <!-- teaser section (very important) -->
 <!-- 
@@ -238,13 +234,107 @@
 </section> 
 -->
 
-<!-- teaser section (very important) -->   
-<section class="hero teaser">
+
+<!-- method section -->
+<section class="section" id="method">
   <div class="container is-max-desktop">
-    <h2 class="subtitle has-text-centered">
-      <b>Overview:</b><br>
-      Below are video demonstrations of our method on six different tasks.
-    </h2>
+    <h2 class="title is-3 has-text-centered">Methods</h2>
+
+    <div class="content" style="font-size: 1.05em;">
+      <p>
+        HSBC is a novel and robust algorithm for learning reward functions from human preferences, even when some of these preferences may be incorrect.
+        It proceeds in iterative batches, maintaining a shrinking hypothesis space of possible reward parameters.
+      </p>
+      <p>
+        In each iteration, HSBC follows three steps: (1) <b>sampling</b> a set of reward hypotheses, (2) <b>actively querying</b> human preferences on selected trajectory pairs based on ensemble disagreement, and (3) <b>cutting</b> the hypothesis space by keeping only reward hypotheses consistent with the new batch of preferences.
+      </p>
+      <p>
+        To ensure robustness, the algorithm uses a <em>conservative cutting threshold</em> that tolerates a bounded fraction of false preferences in each batch.
+        This allows the method to continue learning reliably without needing to explicitly identify incorrect feedback.
+      </p>
+      <p>
+        Below we illustrate key components of the HSBC algorithm.
+        It begins with selecting trajectory pairs from regions where ensemble policies disagree most,
+        as shown in Figures A and E.
+      </p>
+    </div>
+
+    <div class="columns is-multiline is-centered" style="margin-bottom: 2em;">
+      <div class="column is-half has-text-centered">
+        <figure>
+          <img src="./static/images/disagree_2.png" alt="cut_disagree" style="max-width: 100%;">
+          <figcaption><b>Figure A</b>: Batch selection via ensemble disagreement.</figcaption>
+        </figure>
+      </div>
+      <div class="column is-half has-text-centered">
+        <figure>
+          <img src="./static/images/disagree_1.png" alt="cut_single" style="max-width: 100%;">
+          <figcaption><b>Figure E</b>: Comparison of single-pair vs batch cuts.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="columns is-multiline is-centered" style="margin-bottom: 2em;">
+      <div class="column is-half is-offset-one-quarter has-text-centered">
+        <figure>
+          <img src="./static/images/cut_noerror.png" alt="noerror" style="max-width: 100%;">
+          <figcaption><b>Figure B</b>: Space refinement with correct feedback.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="columns is-multiline is-centered">
+      <div class="column is-half has-text-centered">
+        <figure>
+          <img src="./static/images/cut_out.png" alt="cot_out" style="max-width: 100%;">
+          <figcaption><b>Figure C</b>: False preference causes incorrect cut.</figcaption>
+        </figure>
+      </div>
+      <div class="column is-half has-text-centered">
+        <figure>
+          <img src="./static/images/cut_robust.png" alt="cut_robust" style="max-width: 100%;">
+          <figcaption><b>Figure D</b>: Robust cut preserves true reward region.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="content" style="font-size: 1.05em; margin-top: 1.5em;">
+      <p>
+        Specifically, HSBC first selects trajectory pairs in regions where the ensemble of reward hypotheses most disagree (Figures A and E).
+        When clean preferences are available, cuts made based on these preferences accurately isolate the true reward region (Figure B).
+      </p>
+      <p>
+        However, false or noisy preferences can lead to naive cuts that mistakenly eliminate the correct reward hypotheses (Figure C).
+        To address this, HSBC employs robust, conservative cuts (Figure D) that tolerate some false feedback, preserving the true reward region and enabling reliable learning.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- results section -->
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+
+    <div class="content" style="font-size: 1.05em;">
+      <p>
+        We evaluate HSBC on a diverse set of reinforcement learning and model predictive control tasks, including locomotion
+        (<em>Cartpole</em>, <em>Walker</em>, <em>Humanoid</em>, <em>Go2-Standup</em>) and dexterous manipulation
+        (<em>Dexman-Cube</em>, <em>Dexman-Bunny</em>).
+      </p>
+      <p>
+        Our method achieves performance comparable to or better than state-of-the-art baselines such as PREF-BI and Disagreement Learning
+        in noise-free settings. Under high levels of incorrect human feedback (up to 30%), HSBC significantly outperforms existing approaches
+        in both reward accuracy and task performance.
+      </p>
+      <p>
+        These results demonstrate HSBC's strong robustness and sample efficiency in aligning with true reward functions,
+        even in the presence of substantial label noise.
+      </p>
+    </div>
+
     <hr><br>
 
     <!-- six videos in 2-column layout with labels -->
@@ -300,9 +390,9 @@
 
     </div>
 
-    <br><br>
   </div>
 </section>
+
 
 <!-- how-it-works section -->
 
