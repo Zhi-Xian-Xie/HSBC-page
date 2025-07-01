@@ -249,7 +249,6 @@
         In each iteration, HSBC follows three steps: 
       </p>
       <div class="algorithm">
-        <strong>HSBC Algorithm:</strong><br>
         (1) <b>sampling</b> a set of reward hypotheses
         (2) <b>actively querying</b> human preferences on selected trajectory pairs based on ensemble disagreement
         (3) <b>cutting</b> the hypothesis space by keeping only reward hypotheses consistent with the new batch of preferences
@@ -260,7 +259,7 @@
       </p>
       <p>
           Below we illustrate key components of the HSBC algorithm. It starts by selecting trajectory pairs from regions where ensemble policies
-          disagree most, then progressively cuts the hypothesis space based on human feedback.
+          disagree most, then progressively cuts the hypothesis space based on human feedback, as we can see in Fig. 1.
       </p>
 
       <!-- Figure 1: two disagree images side by side -->
@@ -268,47 +267,45 @@
           <div class="column">
               <div class="figure">
                   <img src="./static/images/Figs/Cuts/disagree_1.jpg" alt="Disagreement example left"/>
-                  <div class="caption"><b>Fig. 1 Left</b></div> 
+                  <figcaption style="text-align: center;"><p>Fig. 1 Left</p></figcaption>
               </div>
           </div>
           <div class="column">
               <div class="figure">
                   <img src="./static/images/Figs/Cuts/disagree_2.jpg" alt="Disagreement example right"/>
-                  <div class="caption"><b>Fig. 1 Right</b></div> 
+                  <figcaption style="text-align: center;"><p>Fig. 1 Right</p></figcaption>
               </div>
           </div>
       </div>
 
-      <!-- Figure 2: cut_noerror full width -->
-      <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
-          <img src="./static/images/Figs/Cuts/cut_noerr.jpg" alt="Space refinement with correct feedback" style="width: 50%;">
-          <div class="caption"><b>Fig. 2</b></div> 
-      </div>
-
       <p>
-          With clean preferences, the cuts accurately isolate the true reward region as shown in Fig. 1. However, false or noisy preferences can cause naive cuts that
+          With clean preferences, the cuts accurately isolate the true reward region as shown in Fig. 2. However, false or noisy preferences can cause naive cuts that
           incorrectly eliminate the correct hypotheses.
       </p>
-
+      <!-- Figure 2: cut_noerror full width -->
+      <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
+          <img src="./static/images/Figs/Cuts/cut_noerr.jpg" alt="Space refinement with correct feedback"/>
+          <figcaption style="text-align: center;"><p>Fig. 2</p></figcaption>
+      </div>
+      <p>
+          To handle noisy human preferences, HSBC applies a conservative cutting threshold that tolerates some false feedback, as shown in Fig. 3 Right, 
+          thus preserving the true reward region and enabling reliable learning comparing to Fig. 3 Left.
+      </p>
       <!-- Figure 3: two images side by side: cut_out and cut_robust -->
       <div class="columns">
           <div class="column">
               <div class="figure">
                   <img src="./static/images/Figs/Cuts/cut_out.png" alt="Incorrect cut due to false preference"/>
-                  <div class="caption"><b>Fig. 3 Left</b></div> 
+                  <figcaption style="text-align: center;"><p>Fig. 3 Left</p></figcaption>
               </div>
           </div>
           <div class="column">
               <div class="figure">
                   <img src="./static/images/Figs/Cuts/cut_robust.png" alt="Robust conservative cut"/>
-                  <div class="caption"><b>Fig. 3 Right</b></div> 
+                  <figcaption style="text-align: center;"><p>Fig. 3 Right</p></figcaption>
               </div>
           </div>
       </div>
-
-      <p>
-          To handle noisy human preferences, HSBC applies a conservative cutting threshold that tolerates some false feedback, thus preserving the true reward region and enabling reliable learning.
-      </p>
     </div>
   </div>
 </section>
