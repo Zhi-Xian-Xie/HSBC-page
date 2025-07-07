@@ -177,7 +177,7 @@
 
 
 <!-- abstract section -->
-<section class="section" id="abstract">
+<!-- <section class="section" id="abstract">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Abstract</h2>
     <div class="content" style="font-size: 1.05em;">
@@ -205,7 +205,18 @@
       </p>
     </div>
   </div>
-</section>
+</section> -->
+
+<!-- TLDR Section -->
+<div style="max-width: 850px; margin: 2em auto; font-size: 1.1em;">
+  <div style="background-color: #f5f7fa; border-left: 5px solid #3273dc; padding: 1em 1.2em; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <strong>TL;DR:</strong> 
+    Reward design is often difficult in reinforcement learning. 
+    This work proposes a robust reward alignment method based on hypothesis space batch cutting, which refines the reward space using grouped human preferences. 
+    By conservatively handling errors within each batch, the method remains robust to false feedback without needing to identify them explicitly. 
+    Experiments show strong performance, especially under high levels of incorrect preferences.
+  </div>
+</div>
 
 
 <!-- teaser section (very important) -->
@@ -236,7 +247,7 @@
 
 
 <!-- method section -->
-<section class="section" id="method">
+<!-- <section class="section" id="method">
   <div class="container is-max-desktop">
   <h2 class="title is-3 has-text-centered">Methods</h2>
 
@@ -263,7 +274,7 @@
       </p>
 
       <!-- Figure 1: two disagree images side by side -->
-      <div class="columns">
+      <!-- <div class="columns">
           <div class="column">
               <div class="figure">
                   <img src="./static/images/Figs/Cuts/disagree_1.jpg" alt="Disagreement example left"/>
@@ -283,7 +294,7 @@
           incorrectly eliminate the correct hypotheses.
       </p>
       <!-- Figure 2: cut_noerror full width -->
-      <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
+      <!-- <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
           <img src="./static/images/Figs/Cuts/cut_noerr.jpg" alt="Space refinement with correct feedback"/>
           <figcaption style="text-align: center;"><p>Fig. 2</p></figcaption>
       </div>
@@ -292,7 +303,7 @@
           thus preserving the true reward region and enabling reliable learning comparing to Fig. 3 Left.
       </p>
       <!-- Figure 3: two images side by side: cut_out and cut_robust -->
-      <div class="columns">
+      <!-- <div class="columns">
           <div class="column">
               <div class="figure">
                   <img src="./static/images/Figs/Cuts/cut_out.png" alt="Incorrect cut due to false preference"/>
@@ -308,9 +319,23 @@
       </div>
     </div>
   </div>
+</section> -->
+
+<!-- results section -->
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+
+    <div class="content" style="font-size: 1.05em;">
+      <video autoplay muted loop playsinline controls style="width: 100%; max-width: 800px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <source src="./static/videos/method_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p style="margin-top: 0.5em;">Method Explanation</p>
+    </div>
+
+  </div>
 </section>
-
-
 
 <!-- results section -->
 <section class="section" id="results">
@@ -336,6 +361,32 @@
 
     <hr><br>
 
+    <!-- image comparison grid -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; margin-bottom: 40px;">
+
+      <!-- Row 1 -->
+      <div style="width: 48%; text-align: center;">
+        <img src="./static/images/Figs/comparison/many_baselines_cartpole_2.jpg" alt="Cartpole 20%" style="width: 100%; height: auto; border-radius: 8px;">
+        <p>Cartpole, 20% false rate</p>
+      </div>
+
+      <div style="width: 48%; text-align: center;">
+        <img src="./static/images/Figs/comparison/many_baselines_cartpole_3.jpg" alt="Cartpole 30%" style="width: 100%; height: auto; border-radius: 8px;">
+        <p>Cartpole, 30% false rate</p>
+      </div>
+
+      <!-- Row 2 -->
+      <div style="width: 48%; text-align: center;">
+        <img src="./static/images/Figs/comparison/many_baselines_walker_2.jpg" alt="Walker 20%" style="width: 100%; height: auto; border-radius: 8px;">
+        <p>Walker, 20% false rate</p>
+      </div>
+
+      <div style="width: 48%; text-align: center;">
+        <img src="./static/images/Figs/comparison/many_baselines_walker_3.jpg" alt="Walker 30%" style="width: 100%; height: auto; border-radius: 8px;">
+        <p>Walker, 30% false rate</p>
+      </div>
+    </div>
+    
     <!-- six videos in 2-column layout with labels -->
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
 
