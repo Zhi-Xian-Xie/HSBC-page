@@ -69,10 +69,10 @@
           <h1 class="title is-1 publication-title">Robust Reward Alignment via Hypothesis Space Batch Cutting</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://zhi-xian-xie.github.io" target="_blank">Zhixian Xie</a><sup>1</sup>&nbsp&nbsp,</span>
+              <a href="https://zhi-xian-xie.github.io" target="_blank">Zhixian Xie</a>*<sup>1</sup>&nbsp&nbsp,</span>
 
             <span class="author-block">
-              Haode Zhang<sup>2</sup>&nbsp&nbsp, </span>
+              Haode Zhang*<sup>2</sup>&nbsp&nbsp, </span>
 
             <span class="author-block">
               Yizhe Feng<sup>2</sup>&nbsp&nbsp, </span>
@@ -108,15 +108,15 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
-              <!-- <span class="link-block">
-                <a href="https://proceedings.neurips.cc/paper/2020/hash/5a7b238ba0f6502e5d6be14424b20ded-Abstract.html" target="_blank"
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2502.02921" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Preprint</span>
+                  <span>Paper</span>
                 </a>
-              </span> -->
+              </span>
               <!-- <span class="link-block">
                 <a href="https://papers.nips.cc/paper/2021/hash/85ea6fd7a2ca3960d0cf5201933ac998-Abstract.html" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
@@ -127,15 +127,15 @@
                 </a>
               </span> -->
               <!-- Code Link. -->
-              <!-- <span class="link-block">
-                <a href="https://github.com/wanxinjin/Pontryagin-Differentiable-Programming" target="_blank"
+              <span class="link-block">
+                <a href="https://github.com/Zhi-Xian-Xie/Disagreement_Learning" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
                   <span>Code Repo</span>
                 </a>
-              </span> -->
+              </span>
 
                 <!-- Code Link. -->
                 <!-- <span class="link-block">
@@ -176,9 +176,50 @@
 </section>
 
 
+<!-- abstract section -->
+<!-- <section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+    <div class="content" style="font-size: 1.05em;">
+      <p>
+        Reward design in reinforcement learning is challenging, especially when human preferences contain errors.
+        We propose a robust and efficient alignment method called <strong>Hypothesis Space Batch Cutting (HSBC)</strong>, which refines the reward space
+        by making conservative "cuts" based on batch-wise human feedback. By grouping preferences and applying disagreement-based queries,
+        HSBC improves robustness against false preferences without needing to explicitly identify them.
+      </p>
+      <p>
+        Our method is evaluated across diverse control tasks and achieves competitive results under clean settings,
+        while significantly outperforming baselines under high-noise conditions.
+      </p>
+      <p>
+        Code is available at:
+        <a href="https://github.com/Zhi-Xian-Xie/Disagreement_Learning" target="_blank">
+          https://github.com/Zhi-Xian-Xie/Disagreement_Learning
+        </a>
+      </p>
+      <p>
+        For full details, please see the paper at:
+        <a href="https://arxiv.org/abs/2502.02921" target="_blank">
+          https://arxiv.org/abs/2502.02921
+        </a>
+      </p>
+    </div>
+  </div>
+</section> -->
+
+<!-- TLDR Section -->
+<div style="max-width: 850px; margin: 2em auto; font-size: 1.1em;">
+  <div style="background-color: #f5f7fa; border-left: 5px solid #3273dc; padding: 1em 1.2em; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <strong>TL;DR:</strong> 
+    We propose a novel geometric view of reward alignment as an iterative cutting process over the hypothesis space.
+    Our batched cutting method significantly improves data efficiency by maximizing the value of each human preference query.
+    We introduce a conservative cutting algorithm that ensures robustness to unknown erroneous human preferences without explicitly identifying them.
+  </div>
+</div>
 
 
-<!-- teaser section (very important) -->   
+<!-- teaser section (very important) -->
+<!-- 
 <section class="hero teaser">
   <div class="container is-max-desktop">
       <h2 class="subtitle has-text-centered">
@@ -186,42 +227,218 @@
         Coming Soon!
         <br><br>
     
-        <!-- significant video or figure goes here -->    
+
         <hr>
         <br>
         <figure>
             <h2 class="title is-2">Video: Coming Soon!</h2>
-            <!-- <video id="teaser" muted loop playsinline controls style="width: 100%; max-width: 1000px; height: auto;">
+            <video id="teaser" muted loop playsinline controls style="width: 100%; max-width: 1000px; height: auto;">
               <source src="./static/videos/hardware/duck_1x_small.mp4"
                       type="video/mp4">
-            </video> -->
+            </video>
             <br><br>
         </figure>
       </h2>
   </div>
 
+</section> 
+-->
+
+
+<!-- method section -->
+<!-- <section class="section" id="method">
+  <div class="container is-max-desktop">
+  <h2 class="title is-3 has-text-centered">Methods</h2>
+
+    <div class="content" style="font-size: 1.05em;">
+      <p>
+        HSBC is a novel and robust algorithm for learning reward functions from human preferences, even when some of these preferences may be incorrect.
+        It proceeds in iterative batches, maintaining a shrinking hypothesis space of possible reward parameters.
+      </p>
+      <p>
+        In each iteration, HSBC follows three steps: 
+      </p>
+      <div class="algorithm">
+        (1) <b>sampling</b> a set of reward hypotheses
+        (2) <b>actively querying</b> human preferences on selected trajectory pairs based on ensemble disagreement
+        (3) <b>cutting</b> the hypothesis space by keeping only reward hypotheses consistent with the new batch of preferences
+      </div>
+      <p>
+        To ensure robustness, the algorithm uses a <em>conservative cutting threshold</em> that tolerates a bounded fraction of false preferences in each batch.
+        This allows the method to continue learning reliably without needing to explicitly identify incorrect feedback.
+      </p>
+      <p>
+          Below we illustrate key components of the HSBC algorithm. It starts by selecting trajectory pairs from regions where ensemble policies
+          disagree most, then progressively cuts the hypothesis space based on human feedback, as we can see in Fig. 1.
+      </p>
+
+      <!-- Figure 1: two disagree images side by side -->
+      <!-- <div class="columns">
+          <div class="column">
+              <div class="figure">
+                  <img src="./static/images/Figs/Cuts/disagree_1.jpg" alt="Disagreement example left"/>
+                  <figcaption style="text-align: center;"><p>Fig. 1 Left</p></figcaption>
+              </div>
+          </div>
+          <div class="column">
+              <div class="figure">
+                  <img src="./static/images/Figs/Cuts/disagree_2.jpg" alt="Disagreement example right"/>
+                  <figcaption style="text-align: center;"><p>Fig. 1 Right</p></figcaption>
+              </div>
+          </div>
+      </div>
+
+      <p>
+          With clean preferences, the cuts accurately isolate the true reward region as shown in Fig. 2. However, false or noisy preferences can cause naive cuts that
+          incorrectly eliminate the correct hypotheses.
+      </p>
+      <!-- Figure 2: cut_noerror full width -->
+      <!-- <div class="figure" style="max-width: 700px; margin-left: auto; margin-right: auto;">
+          <img src="./static/images/Figs/Cuts/cut_noerr.jpg" alt="Space refinement with correct feedback"/>
+          <figcaption style="text-align: center;"><p>Fig. 2</p></figcaption>
+      </div>
+      <p>
+          To handle noisy human preferences, HSBC applies a conservative cutting threshold that tolerates some false feedback, as shown in Fig. 3 Right, 
+          thus preserving the true reward region and enabling reliable learning comparing to Fig. 3 Left.
+      </p>
+      <!-- Figure 3: two images side by side: cut_out and cut_robust -->
+      <!-- <div class="columns">
+          <div class="column">
+              <div class="figure">
+                  <img src="./static/images/Figs/Cuts/cut_out.png" alt="Incorrect cut due to false preference"/>
+                  <figcaption style="text-align: center;"><p>Fig. 3 Left</p></figcaption>
+              </div>
+          </div>
+          <div class="column">
+              <div class="figure">
+                  <img src="./static/images/Figs/Cuts/cut_robust.png" alt="Robust conservative cut"/>
+                  <figcaption style="text-align: center;"><p>Fig. 3 Right</p></figcaption>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- method section -->
+<section class="section" id="method"> 
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Method</h2> 
+
+    <div style="display: flex; justify-content: center;">
+      <video autoplay muted loop playsinline controls style="width: 100%; max-width: 1000px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <source src="./static/videos/method_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+  </div>
 </section>
 
-<!-- how-it-works section -->
 
-<section class="section">
+<!-- results section -->
+<section class="section" id="results">
   <div class="container is-max-desktop">
-      <br>
-      <hr>
-      <br>
-      <h2 class="title is-2">Method Overview</h2>
-      <div class="content text-align: left">
-        <br>
-        Coming Soon!
+    <h2 class="title is-3 has-text-centered">Results</h2>
+
+    <div class="content" style="font-size: 1.05em;">
+      <p>
+        We evaluate HSBC on a diverse set of MPC tasks, including locomotion
+        (<em>Cartpole-Swingup</em>, <em>Walker-Walk</em>, <em>Humanoid-Standup</em>, <em>Go2-Standup</em>) and dexterous manipulation
+        (<em>Allegro-Cube</em>, <em>Allegro-Bunny</em>).
+      </p>
+      <p>
+        Our method achieves performance comparable to or better than state-of-the-art baselines such as PREF-BI and Disagreement Learning
+        in noise-free settings. Under high levels of incorrect human feedback (up to 30%), HSBC significantly outperforms existing approaches
+        in both reward accuracy and task performance.
+      </p>
+      <p>
+        These results demonstrate HSBC's strong robustness and sample efficiency in aligning with true reward functions,
+        even in the presence of substantial label noise.
+      </p>
+    </div>
+
+    <hr><br>
+
+    <!-- image comparison grid -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; margin-bottom: 40px;">
+
+      <!-- Row 1 -->
+      <div style="width: 48%; text-align: center;">
+        <img src="./static/images/Figs/comparison/many_baselines_cartpole_2.jpg" alt="Cartpole 20%" style="width: 100%; height: auto; border-radius: 8px;">
+        <p>Cartpole, 20% false rate</p>
       </div>
-    <!-- </div> -->
-       <!-- /Figure -->
-      <!-- <div style="text-align: center;">
-        <img src="./static/images/web_sdf_fig2.png" alt="Description of the image" style="max-width: 90%; height: auto;">
-        <figcaption class="has-text-centered">Captions</figcaption> 
-      </div> -->
-      <br>
-      <hr>
+
+      <div style="width: 48%; text-align: center;">
+        <img src="./static/images/Figs/comparison/many_baselines_cartpole_3.jpg" alt="Cartpole 30%" style="width: 100%; height: auto; border-radius: 8px;">
+        <p>Cartpole, 30% false rate</p>
+      </div>
+
+      <!-- Row 2 -->
+      <div style="width: 48%; text-align: center;">
+        <img src="./static/images/Figs/comparison/many_baselines_walker_2.jpg" alt="Walker 20%" style="width: 100%; height: auto; border-radius: 8px;">
+        <p>Walker, 20% false rate</p>
+      </div>
+
+      <div style="width: 48%; text-align: center;">
+        <img src="./static/images/Figs/comparison/many_baselines_walker_3.jpg" alt="Walker 30%" style="width: 100%; height: auto; border-radius: 8px;">
+        <p>Walker, 30% false rate</p>
+      </div>
+    </div>
+    
+    <!-- six videos in 2-column layout with labels -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+
+      <div style="width: 48%; text-align: center;">
+        <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+          <source src="./static/videos/go2_standup.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>Go2 Standup</p>
+      </div>
+
+      <div style="width: 48%; text-align: center;">
+        <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+          <source src="./static/videos/humanoid_standup.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>Humanoid Standup</p>
+      </div>
+
+      <div style="width: 48%; text-align: center;">
+        <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+          <source src="./static/videos/allegro_cube.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>Allegro Cube</p>
+      </div>
+
+      <div style="width: 48%; text-align: center;">
+        <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+          <source src="./static/videos/allegro_bunny.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>Allegro Bunny</p>
+      </div>
+
+      <div style="width: 48%; text-align: center;">
+        <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+          <source src="./static/videos/cartpole.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>Cartpole Swingup</p>
+      </div>
+
+      <div style="width: 48%; text-align: center;">
+        <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+          <source src="./static/videos/hopper.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p>Walker Walk</p>
+      </div>
+
+    </div>
+
   </div>
 </section>
 
@@ -241,7 +458,25 @@
   </div>
 </section> -->
 
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop content">
+    <br>
+    <hr>
+    <br>
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{xie2025robustrewardalignmenthypothesis,
+  title        = {Robust Reward Alignment via Hypothesis Space Batch Cutting}, 
+  author       = {Zhixian Xie and Haode Zhang and Yizhe Feng and Wanxin Jin},
+  year         = {2025},
+  eprint       = {2502.02921},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.LG},
+  url          = {https://arxiv.org/abs/2502.02921}
+}</code></pre>
+  </div>
+</section>
 
+  
 <footer class="footer">
   <div class="container">
     <!-- <div class="content has-text-centered">
@@ -274,5 +509,7 @@
   </div>
 </footer>
 
+
+  
 </body>
 </html>
