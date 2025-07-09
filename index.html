@@ -114,7 +114,7 @@
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Preprint</span>
+                  <span>Paper</span>
                 </a>
               </span>
               <!-- <span class="link-block">
@@ -211,10 +211,9 @@
 <div style="max-width: 850px; margin: 2em auto; font-size: 1.1em;">
   <div style="background-color: #f5f7fa; border-left: 5px solid #3273dc; padding: 1em 1.2em; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
     <strong>TL;DR:</strong> 
-    Reward design is often difficult in reinforcement learning. 
-    This work proposes a robust reward alignment method based on hypothesis space batch cutting, which refines the reward space using grouped human preferences. 
-    By conservatively handling errors within each batch, the method remains robust to false feedback without needing to identify them explicitly. 
-    Experiments show strong performance, especially under high levels of incorrect preferences.
+    We propose a novel geometric view of reward alignment as an iterative cutting process over the hypothesis space.
+    Our batched cutting method significantly improves data efficiency by maximizing the value of each human preference query.
+    We introduce a conservative cutting algorithm that ensures robustness to unknown erroneous human preferences without explicitly identifying them.
   </div>
 </div>
 
@@ -344,7 +343,7 @@
 
     <div class="content" style="font-size: 1.05em;">
       <p>
-        We evaluate HSBC on a diverse set of reinforcement learning and model predictive control tasks, including locomotion
+        We evaluate HSBC on a diverse set of MPC tasks, including locomotion
         (<em>Cartpole-Swingup</em>, <em>Walker-Walk</em>, <em>Humanoid-Standup</em>, <em>Go2-Standup</em>) and dexterous manipulation
         (<em>Allegro-Cube</em>, <em>Allegro-Bunny</em>).
       </p>
